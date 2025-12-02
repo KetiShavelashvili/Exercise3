@@ -1,9 +1,26 @@
-﻿using System;
+using System;
 
 namespace Program
 {
     class Program
     {
+
+        static bool IsPrime(int number)
+        {
+            if (number <= 1) return false;
+            if (number == 2) return true;
+            if (number % 2 == 0) return false;
+
+            for (int i = 3; i <= Math.Sqrt(number); i += 2)
+            {
+                if (number % i == 0)
+                    return false;
+            }
+
+            return true;
+        }
+
+
         static void Main(string[] args)
         {
 
@@ -41,23 +58,9 @@ namespace Program
 
 
 
+            Console.WriteLine("\n" + "Bonus part: ");
 
             // Bonus:
-
-            static bool IsPrime(int number)
-            {
-                if (number <= 1) return false;
-                if (number == 2) return true;
-                if (number % 2 == 0) return false;
-
-                for (int i = 3; i <= Math.Sqrt(number); i += 2)
-                {
-                    if (number % i == 0)
-                        return false;
-                }
-
-                return true;
-            }
 
 
             int number;
@@ -80,39 +83,65 @@ namespace Program
 
 
 
-            if (valid)
-            {
+            int CountPrimes = 0;
+            int SumEven = 0;
+            int MaxOdd = 0;
+            int SumDivBy7 = 0;
 
-                number = Convert.ToInt32(input);
-                for (int j = 1; j <= number; j++)
-                {
-                    if (j % 3 == 0 && j % 5 == 0)
-                    {
-                        Console.Write("FizzBuzz ");
-                    }
-                    else if (j % 3 == 0)
-                    {
-                        Console.Write("Fizz ");
-                    }
-                    else if (j % 5 == 0)
-                    {
-                        Console.Write("Buzz ");
-                    }
-                    else if (IsPrime(j))
-                    {
-                        Console.Write($"[{j}] ");
-                    }
-                    else
-                    {
-                        Console.Write(j + " ");
-                    }
 
-                }
-            }
-            else
+            if (!valid)
             {
                 Console.WriteLine("Too many invalid attempts. Exiting");
             }
+
+
+            number = Convert.ToInt32(input);
+            for (int j = 1; j <= number; j++)
+            {
+                if (j % 3 == 0 && j % 5 == 0)
+                {
+                    Console.Write("FizzBuzz ");
+                }
+                else if (j % 3 == 0)
+                {
+                    Console.Write("Fizz ");
+                }
+                else if (j % 5 == 0)
+                {
+                    Console.Write("Buzz ");
+                }
+                else if (IsPrime(j))
+                {
+                    CountPrimes++;
+                    Console.Write($"[{j}] ");
+                }
+                else
+                {
+                    Console.Write(j + " ");
+                }
+
+
+                if (j % 2 == 0)
+                {
+                    SumEven += j;
+                }
+                if (j % 2 == 1)
+                {
+                    MaxOdd = j;
+                }
+                if (j % 7 == 0)
+                {
+                    SumDivBy7 += j;
+                }
+
+            }
+
+
+            Console.WriteLine("\n" + $"CountPrimes: {CountPrimes}");
+            Console.WriteLine($"SumEven: {SumEven}");
+            Console.WriteLine($"MaxOdd: {MaxOdd}");
+            Console.WriteLine($"SumDivBy7: {SumDivBy7}");
+            Console.WriteLine("Well done, Keti! You combined loops and conditionals successfully.");
 
 
         }
